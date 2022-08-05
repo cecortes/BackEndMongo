@@ -1,0 +1,19 @@
+{
+  "name": "backendmongo",
+  "version": "1.0.0",
+  "description": "BackEnd for Mongo Data Base",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cecortes/BackEndMongo.git"
+  },
+  "author": "César López",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cecortes/BackEndMongo/issues"
+  },
+  "homepage": "https://github.com/cecortes/BackEndMongo#readme"
+}
