@@ -33,5 +33,22 @@ app.get("/test", (req, res) => {
   });
 });
 
+// Post Route
+app.post("/post", (req, res) => {
+  // Send a 200 response with a message
+  res.status(200).send({
+    message: "Post request received!!!",
+  });
+
+  // Console log the request
+  //console.log(req);
+
+  // Console log the body of the request
+  //console.log(req.body);
+
+  // Console log the request nombre property and apellidos property
+  console.log(req.body.nombre, " - ", req.body.apellidos);
+});
+
 // Export the app object
 module.exports = app;
