@@ -93,6 +93,34 @@ const controller = {
       });
     });
   },
+
+  // Create a getProjects function
+  getProjects: function (req, res) {
+    // Find the projects in the database
+    Project.find({}, (err, projects) => {
+      // Check if there is an error
+      if (err) {
+        // Send a 500 response with a message
+        res.status(500).send({
+          message: "Error getting the projects!!!",
+        });
+      }
+
+      // Check if the projects are not found
+      if (!projects) {
+        // Send a 404 response with a message
+        res.status(404).send({
+          message: "Projects were not found!!!",
+        });
+      }
+
+      // Return a 200 response with the projects found
+      res.status(200).send({
+        projects: projects,
+        message: "Projects listed successfully!!!",
+      });
+    }).sort("-year"); // Sort the projects by year in descending order
+  },
 };
 
 // Export the controller object

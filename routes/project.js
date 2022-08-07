@@ -22,5 +22,8 @@ router.post("/save-project", projectController.saveProject);
 // Create a getProject route by id
 router.get("/get-project/:id?", projectController.getProject);
 
+// Create a getProjects route
+router.get("/get-projects", projectController.getProjects);
+
 // Export the router object
 module.exports = router;
