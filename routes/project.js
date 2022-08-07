@@ -16,5 +16,8 @@ router.get("/", projectController.home);
 // Create a test route
 router.post("/test", projectController.test);
 
+// Create a saveProject route
+router.post("/save-project", projectController.saveProject);
+
 // Export the router object
 module.exports = router;

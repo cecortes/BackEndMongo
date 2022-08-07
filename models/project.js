@@ -13,7 +13,8 @@ const ProjectSchema = Schema({
   description: String,
   category: String,
   year: Number,
-  langs: [String],
+  langs: String,
+  image: String,
 });
 
 // Export the project schema
