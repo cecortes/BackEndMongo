@@ -62,6 +62,37 @@ const controller = {
       });
     });
   },
+
+  // Create a getProject function
+  getProject: function (req, res) {
+    // Create a projectId variable to store the id of the request
+    var projectId = req.params.id;
+
+    // Find the project in the database
+    Project.findById(projectId, (err, project) => {
+      // Check if there is an error
+      if (err) {
+        // Send a 500 response with a message
+        res.status(500).send({
+          message: "Error getting the project!!!",
+        });
+      }
+
+      // Check if the project is not found
+      if (!project || projectId == null) {
+        // Send a 404 response with a message
+        res.status(404).send({
+          message: "The project was not found!!!",
+        });
+      }
+
+      // Return a 200 response with the project found
+      res.status(200).send({
+        project: project,
+        message: "The project found successfully!!!",
+      });
+    });
+  },
 };
 
 // Export the controller object

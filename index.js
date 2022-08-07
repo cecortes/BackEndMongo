@@ -20,7 +20,24 @@ mongoose
 
     // Create Server
     app.listen(port, () => {
+      console.log("************************************************");
       console.log(`Server running on localhost:${port}`);
+      console.log("Press CTRL + C to stop the server");
+      console.log("************************************************");
+      console.log("Routes available:");
+      console.log("/api/");
+      console.log("/api/test");
+      console.log("/api/save-project");
+      console.log("/api/get-project/:id?");
+      console.log("************************************************");
+      console.log("Create a project with the following data:");
+      console.log("name: String");
+      console.log("description: String");
+      console.log("category: String");
+      console.log("year: Number");
+      console.log("langs: String");
+      console.log("imgage: String");
+      console.log("************************************************");
     });
   })
   .catch((err) => console.log(err));
