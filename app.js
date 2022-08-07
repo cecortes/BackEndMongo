@@ -10,16 +10,18 @@ const bodyParser = require("body-parser");
 const app = express();
 
 // Setup files Routes
+const projectRoutes = require("./routes/project");
 
 // Setup Middelwares
 app.use(bodyParser.urlencoded({ extended: false })); // Parse application/x-www-form-urlencoded
 app.use(bodyParser.json()); // Parse application/json
+app.use("/api", projectRoutes); // Setup the routes
 
 // CORS
 
 // Load Routes
-
-// home route
+/*
+//home route
 app.get("/", (req, res) => {
   // Send a H1 tag with the text "It's alive!!!" as 200 status code
   res.status(200).send("<h1>It's alive!!!</h1>");
@@ -49,6 +51,7 @@ app.post("/post", (req, res) => {
   // Console log the request nombre property and apellidos property
   console.log(req.body.nombre, " - ", req.body.apellidos);
 });
+*/
 
 // Export the app object
 module.exports = app;
