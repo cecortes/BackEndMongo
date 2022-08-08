@@ -28,5 +28,8 @@ router.get("/get-projects", projectController.getProjects);
 // Create a updateProject route
 router.put("/update-project/:id", projectController.updateProject);
 
+// Create a deleteProject route
+router.delete("/delete-project/:id", projectController.deleteProject);
+
 // Export the router object
 module.exports = router;
