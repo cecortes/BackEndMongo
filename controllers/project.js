@@ -121,6 +121,45 @@ const controller = {
       });
     }).sort("-year"); // Sort the projects by year in descending order
   },
+
+  // Create a updateProject function
+  updateProject: function (req, res) {
+    // Create a projectId variable to store the id of the request
+    var projectId = req.params.id;
+
+    // Create a update object to store the body of the request
+    var update = req.body;
+
+    // Find the project in the database and update it
+    Project.findByIdAndUpdate(
+      projectId,
+      update,
+      { new: true }, // Return the updated project
+      (err, projectUpdated) => {
+        // Check if there is an error
+        if (err) {
+          // Send a 500 response with a message
+          res.status(500).send({
+            message: "Error updating the project!!!",
+          });
+        }
+
+        // Check if the project is not found
+        if (!projectUpdated) {
+          // Send a 404 response with a message
+          res.status(404).send({
+            message: "The project was not found!!!",
+          });
+        }
+
+        // Return a 200 response with the project found
+        res.status(200).send({
+          project: projectUpdated,
+          message: "The project updated successfully!!!",
+        });
+      }
+    );
+  },
 };
 
 // Export the controller object

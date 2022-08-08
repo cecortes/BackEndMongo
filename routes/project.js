@@ -25,5 +25,8 @@ router.get("/get-project/:id?", projectController.getProject);
 // Create a getProjects route
 router.get("/get-projects", projectController.getProjects);
 
+// Create a updateProject route
+router.put("/update-project/:id", projectController.updateProject);
+
 // Export the router object
 module.exports = router;
