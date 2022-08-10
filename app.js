@@ -18,9 +18,18 @@ app.use(bodyParser.json()); // Parse application/json
 app.use("/api", projectRoutes); // Setup the routes
 
 // CORS
-
-// Load Routes
-/*
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Allow", "GET, POST, PUT, DELETE");
+  next();
+}),
+  // Load Routes
+  /*
 //home route
 app.get("/", (req, res) => {
   // Send a H1 tag with the text "It's alive!!!" as 200 status code
@@ -53,5 +62,5 @@ app.post("/post", (req, res) => {
 });
 */
 
-// Export the app object
-module.exports = app;
+  // Export the app object
+  (module.exports = app);
