@@ -191,6 +191,63 @@ const controller = {
       });
     });
   },
+
+  // Create a uploadImage function
+  uploadImage: function (req, res) {
+    // Create a projectId variable to store the id of the request
+    var projectId = req.params.id;
+
+    // Create a file variable to store the file of the request
+    var file = req.files;
+    var file_name = "Imagen no subida";
+
+    // Check if the file is not empty
+    if (file) {
+      // Create a filePath variable to store the path of the file
+      var filePath = file.image.path;
+
+      // Create a fileSplit variable to store the split of the file path
+      var fileSplit = filePath.split("/");
+
+      // Create a fileName variable to store the name of the file
+      var fileName = fileSplit[1];
+
+      // Save the file in the database
+      Project.findByIdAndUpdate(
+        projectId,
+        { image: fileName },
+        { new: true }, // Return the updated project
+        (err, projectUpdated) => {
+          // Check if there is an error
+          if (err) {
+            // Send a 500 response with a message
+            res.status(500).send({
+              message: "Error uploading the image!!!",
+            });
+          }
+
+          // Check if the project is not found
+          if (!projectUpdated) {
+            // Send a 404 response with a message
+            res.status(404).send({
+              message: "The project was not found!!!",
+            });
+          }
+
+          // Return a 200 response with the project found
+          res.status(200).send({
+            project: projectUpdated,
+            message: "The image uploaded successfully!!!",
+          });
+        }
+      );
+    } else {
+      // Send a 404 response with a message
+      res.status(404).send({
+        message: "File not uploaded!!!",
+      });
+    }
+  },
 };
 
 // Export the controller object

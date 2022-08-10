@@ -7,6 +7,12 @@ const express = require("express");
 // Create a project controller object
 const projectController = require("../controllers/project");
 
+// Create a middleware object to use the multipart module and save the image in the uploads folder
+const multipart = require("connect-multiparty");
+
+// Create a multipart object to use the uploads folder
+const uploads = multipart({ uploadDir: "./uploads" });
+
 // Create a router object
 const router = express.Router();
 
@@ -30,6 +36,9 @@ router.put("/update-project/:id", projectController.updateProject);
 
 // Create a deleteProject route
 router.delete("/delete-project/:id", projectController.deleteProject);
+
+// Create a uploadImage route
+router.post("/upload-image/:id", uploads, projectController.uploadImage);
 
 // Export the router object
 module.exports = router;
