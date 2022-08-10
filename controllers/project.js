@@ -3,6 +3,9 @@
 // Create a model object
 const Project = require("../models/project");
 
+// Create a fs object to use the file system module
+const fs = require("fs");
+
 // Create a json class for the controller
 const controller = {
   // Create a home function
@@ -212,35 +215,65 @@ const controller = {
       // Create a fileName variable to store the name of the file
       var fileName = fileSplit[1];
 
-      // Save the file in the database
-      Project.findByIdAndUpdate(
-        projectId,
-        { image: fileName },
-        { new: true }, // Return the updated project
-        (err, projectUpdated) => {
+      // Create a fileExtension variable to store the extension of the file
+      var fileExtension = fileName.split(".");
+
+      // Create a fileExtension variable to store the extension of the file
+      var fileExtension = fileExtension[1];
+
+      // Check if the file extension is equal to the allowed extensions
+      if (
+        fileExtension == "png" ||
+        fileExtension == "jpg" ||
+        fileExtension == "jpeg" ||
+        fileExtension == "gif"
+      ) {
+        // Save the file in the database
+        Project.findByIdAndUpdate(
+          projectId,
+          { image: fileName },
+          { new: true }, // Return the updated project
+          (err, projectUpdated) => {
+            // Check if there is an error
+            if (err) {
+              // Send a 500 response with a message
+              res.status(500).send({
+                message: "Error uploading the image!!!",
+              });
+            }
+
+            // Check if the project is not found
+            if (!projectUpdated) {
+              // Send a 404 response with a message
+              res.status(404).send({
+                message: "The project was not found!!!",
+              });
+            }
+
+            // Return a 200 response with the project found
+            res.status(200).send({
+              project: projectUpdated,
+              message: "The image uploaded successfully!!!",
+            });
+          }
+        );
+      } else {
+        // Delete the file from the system
+        fs.unlink(filePath, (err) => {
           // Check if there is an error
           if (err) {
             // Send a 500 response with a message
             res.status(500).send({
-              message: "Error uploading the image!!!",
+              message: "Error deleting the image!!!",
             });
           }
+        });
 
-          // Check if the project is not found
-          if (!projectUpdated) {
-            // Send a 404 response with a message
-            res.status(404).send({
-              message: "The project was not found!!!",
-            });
-          }
-
-          // Return a 200 response with the project found
-          res.status(200).send({
-            project: projectUpdated,
-            message: "The image uploaded successfully!!!",
-          });
-        }
-      );
+        // Send a 400 response with a message
+        res.status(400).send({
+          message: "The image extension is not valid!!!",
+        });
+      }
     } else {
       // Send a 404 response with a message
       res.status(404).send({
