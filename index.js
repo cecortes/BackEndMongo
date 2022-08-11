@@ -33,6 +33,7 @@ mongoose
       console.log("/api/update-project/:id");
       console.log("/api/delete-project/:id");
       console.log("/api/upload-image/:id");
+      console.log("/api/get-image/:image");
       console.log("************************************************");
       console.log("Create a project with the following data:");
       console.log("name: String");

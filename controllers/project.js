@@ -6,6 +6,9 @@ const Project = require("../models/project");
 // Create a fs object to use the file system module
 const fs = require("fs");
 
+// Create a path object to use the path module
+const path = require("path");
+
 // Create a json class for the controller
 const controller = {
   // Create a home function
@@ -278,6 +281,26 @@ const controller = {
       // Send a 404 response with a message
       res.status(404).send({
         message: "File not uploaded!!!",
+      });
+    }
+  },
+
+  // Create a getImageFile function
+  getImageFile: function (req, res) {
+    // Create a file variable to store the url of the request
+    var file = req.params.image;
+
+    // Create a filePath variable to store the path of the file
+    var filePath = "./uploads/" + file;
+
+    // Check if the file exists
+    if (fs.existsSync(filePath)) {
+      // Send a 200 response with the file
+      res.sendFile(path.resolve(filePath));
+    } else {
+      // Send a 404 response with a message
+      res.status(404).send({
+        message: "The image was not found!!!",
       });
     }
   },

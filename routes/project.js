@@ -40,5 +40,8 @@ router.delete("/delete-project/:id", projectController.deleteProject);
 // Create a uploadImage route
 router.post("/upload-image/:id", uploads, projectController.uploadImage);
 
+// Create a getImage route
+router.get("/get-image/:image", projectController.getImageFile);
+
 // Export the router object
 module.exports = router;
