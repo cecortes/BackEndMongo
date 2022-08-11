@@ -29,6 +29,10 @@ mongoose
       console.log("/api/test");
       console.log("/api/save-project");
       console.log("/api/get-project/:id?");
+      console.log("/api/get-projects");
+      console.log("/api/update-project/:id");
+      console.log("/api/delete-project/:id");
+      console.log("/api/upload-image/:id");
       console.log("************************************************");
       console.log("Create a project with the following data:");
       console.log("name: String");
